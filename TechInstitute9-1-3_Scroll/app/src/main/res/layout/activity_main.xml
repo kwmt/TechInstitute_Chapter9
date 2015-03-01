@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:text="@string/hello_world" />
 
+        <!--p11 下部の「スクロールビューについて」に記載あり-->
         <!--ScrollViewは中に1つの要素しか置くことができない。-->
         <!--実行はできるが、スクロールしない-->
         <!--下記のエラーが出る-->
