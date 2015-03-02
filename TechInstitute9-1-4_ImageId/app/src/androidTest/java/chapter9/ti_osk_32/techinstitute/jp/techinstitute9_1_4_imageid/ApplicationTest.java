@@ -1,4 +1,4 @@
-package chapter9.ti_osk_32.techinstitute.jp.techinstitute9_1_3_imageid;
+package chapter9.ti_osk_32.techinstitute.jp.techinstitute9_1_4_imageid;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

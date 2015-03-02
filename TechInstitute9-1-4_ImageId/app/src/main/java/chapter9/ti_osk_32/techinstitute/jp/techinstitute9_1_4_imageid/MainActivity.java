@@ -1,7 +1,7 @@
-package chapter9.ti_osk_32.techinstitute.jp.techinstitute9_1_3_imageid;
+package chapter9.ti_osk_32.techinstitute.jp.techinstitute9_1_4_imageid;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;

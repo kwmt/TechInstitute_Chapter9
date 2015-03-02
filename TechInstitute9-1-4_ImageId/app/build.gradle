@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "chapter9.ti_osk_32.techinstitute.jp.techinstitute9_1_3_imageid"
+        applicationId "chapter9.ti_osk_32.techinstitute.jp.techinstitute9_1_4_imageid"
         minSdkVersion 18
         targetSdkVersion 21
         versionCode 1

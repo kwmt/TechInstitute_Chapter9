@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="chapter9.ti_osk_32.techinstitute.jp.techinstitute9_1_3_imageid" >
+    package="chapter9.ti_osk_32.techinstitute.jp.techinstitute9_1_4_imageid" >
 
     <application
         android:allowBackup="true"
