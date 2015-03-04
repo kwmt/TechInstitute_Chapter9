@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/prefecture"
         android:layout_marginTop="20dp"
-        android:text="2015/03/08"
+        android:text="明日の天気予報"
         android:textSize="24sp" />
 
     <ImageView
