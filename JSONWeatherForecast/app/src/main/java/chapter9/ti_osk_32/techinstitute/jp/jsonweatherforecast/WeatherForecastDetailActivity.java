@@ -85,8 +85,8 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
                 int tempMax = tomorrow.getJSONObject("temp").getInt("max");
                 int tempMin = tomorrow.getJSONObject("temp").getInt("min");
 
-                TextView tempMaxTextView = (TextView)WeatherForecastDetailActivity.this.findViewById(R.id.tempMax);
-                TextView tempMinTextView = (TextView)WeatherForecastDetailActivity.this.findViewById(R.id.tempMin);
+                TextView tempMaxTextView = (TextView)findViewById(R.id.tempMax);
+                TextView tempMinTextView = (TextView)findViewById(R.id.tempMin);
 
                 tempMaxTextView.setText(String.valueOf(tempMax));
                 tempMinTextView.setText(String.valueOf(tempMin));
