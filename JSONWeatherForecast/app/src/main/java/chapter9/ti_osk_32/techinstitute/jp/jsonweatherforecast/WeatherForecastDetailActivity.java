@@ -1,6 +1,5 @@
 package chapter9.ti_osk_32.techinstitute.jp.jsonweatherforecast;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -24,26 +23,21 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
     // 天気予報API URL
     String weatherUrl = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Osaka&mode=json&units=metric&cnt=2";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_forecast_detail);
 
         // 非同期でネットワークにアクセスする。
-        AsyncHttpRequest task = new AsyncHttpRequest(this);
+        AsyncHttpRequest task = new AsyncHttpRequest();
         task.execute(weatherUrl);
     }
 
 
     public class AsyncHttpRequest extends AsyncTask<String, Void, String> {
 
-        private Activity activity;
+        public AsyncHttpRequest() {
 
-        public AsyncHttpRequest(Activity activity) {
-
-            // 呼び出し元のアクティビティ
-            this.activity = activity;
         }
 
         @Override
@@ -91,8 +85,8 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
                 int tempMax = tomorrow.getJSONObject("temp").getInt("max");
                 int tempMin = tomorrow.getJSONObject("temp").getInt("min");
 
-                TextView tempMaxTextView = (TextView)activity.findViewById(R.id.tempMax);
-                TextView tempMinTextView = (TextView)activity.findViewById(R.id.tempMin);
+                TextView tempMaxTextView = (TextView)WeatherForecastDetailActivity.this.findViewById(R.id.tempMax);
+                TextView tempMinTextView = (TextView)WeatherForecastDetailActivity.this.findViewById(R.id.tempMin);
 
                 tempMaxTextView.setText(String.valueOf(tempMax));
                 tempMinTextView.setText(String.valueOf(tempMin));
@@ -104,6 +98,9 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
 
 
     }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
