@@ -128,7 +128,6 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
 
             InputStream inputStream = null;
             Bitmap bitmap = null;
-            StringBuilder content = new StringBuilder();
 
             try {
                 // urlオブジェクトを作成
@@ -156,7 +155,7 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
         }
 
 
-        // このメソッドは非同期処理が終わった後に呼び出さる。
+        // このメソッドは非同期処理が終わった後に呼び出される。
         @Override
         protected void onPostExecute(Bitmap result) {
             ImageView imageView = (ImageView)findViewById(R.id.weatherIcon);
