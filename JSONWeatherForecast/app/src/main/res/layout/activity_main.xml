@@ -12,7 +12,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="明日の天気予報を見たい都道府県をタップして下さい。"
+        android:text="天気予報を見たい都道府県をタップして下さい。"
         android:textSize="20sp" />
 
 
