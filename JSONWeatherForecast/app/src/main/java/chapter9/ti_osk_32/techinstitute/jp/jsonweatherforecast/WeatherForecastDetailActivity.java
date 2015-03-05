@@ -22,8 +22,16 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-
+/**
+ * 天気予報詳細アクティビティ
+ */
 public class WeatherForecastDetailActivity extends ActionBarActivity {
+    // API仕様
+    // 天気コード
+    // http://openweathermap.org/weather-conditions
+
+    // パラメータ仕様
+    // http://openweathermap.org/weather-data#16days
 
     // 天気予報API URL
     String weatherUrl = "http://api.openweathermap.org/data/2.5/forecast/daily?mode=json&units=metric&cnt=2&q=";
