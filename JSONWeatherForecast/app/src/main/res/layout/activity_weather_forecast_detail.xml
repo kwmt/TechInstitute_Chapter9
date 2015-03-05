@@ -15,6 +15,7 @@
         android:text="大阪"
         android:textSize="24sp" />
 
+    <!--明日の天気予報を表示-->
     <TextView
         android:id="@+id/tomorrowTextView"
         android:layout_width="wrap_content"
@@ -57,6 +58,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/tempMinLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tempMaxLayout"
@@ -79,4 +81,78 @@
 
     </LinearLayout>
 
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@id/tempMinLayout"
+        android:background="#000000"
+        android:layout_marginTop="20dp"
+
+        />
+
+    <!--明後日の天気予報を表示-->
+    <TextView
+        android:id="@+id/dayAfterTomorrowTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/separator"
+        android:layout_marginTop="20dp"
+        android:text="明後日の天気予報"
+        android:textSize="24sp" />
+
+    <ImageView
+        android:id="@+id/weatherIcon2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/dayAfterTomorrowTextView"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_launcher" />
+
+
+    <LinearLayout
+        android:id="@+id/tempMaxLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/weatherIcon2"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="最高気温"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tempMax2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="10℃"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tempMaxLayout2"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="最低気温"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tempMin2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="5℃"
+            android:textSize="24sp" />
+
+    </LinearLayout>
 </RelativeLayout>

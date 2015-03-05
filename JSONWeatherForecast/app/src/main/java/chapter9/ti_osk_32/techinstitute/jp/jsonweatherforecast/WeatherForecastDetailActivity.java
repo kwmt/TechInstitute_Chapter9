@@ -90,6 +90,8 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
 
                 JSONObject jsonObject = new JSONObject(result);
                 JSONArray list = jsonObject.getJSONArray("list");
+
+                // 明日の天気予報を取得してビューにセットする。
                 JSONObject tomorrow = list.getJSONObject(0);
                 int tempMax = tomorrow.getJSONObject("temp").getInt("max");
                 int tempMin = tomorrow.getJSONObject("temp").getInt("min");
@@ -104,6 +106,25 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
                 // 画像をダウンロードする。
                 DownloadImageTask task = new DownloadImageTask();
                 task.execute(imageUrl + weatherIcon + ".png");
+
+
+
+                // あさっての天気予報を取得してビューにセットする。
+                JSONObject dayAfterTomorrow = list.getJSONObject(1);
+                int tempMax2 = dayAfterTomorrow.getJSONObject("temp").getInt("max");
+                int tempMin2 = dayAfterTomorrow.getJSONObject("temp").getInt("min");
+                String weatherIcon2 = dayAfterTomorrow.getJSONArray("weather").getJSONObject(0).getString("icon");
+
+                TextView tempMaxTextView2 = (TextView)findViewById(R.id.tempMax2);
+                TextView tempMinTextView2 = (TextView)findViewById(R.id.tempMin2);
+
+                tempMaxTextView2.setText(String.valueOf(tempMax2) + "℃");
+                tempMinTextView2.setText(String.valueOf(tempMin2) + "℃");
+
+                // 画像をダウンロードする。
+                DownloadImageTask task2 = new DownloadImageTask();
+                task2.execute(imageUrl + weatherIcon2 + ".png");
+
 
 
             } catch (JSONException e) {
