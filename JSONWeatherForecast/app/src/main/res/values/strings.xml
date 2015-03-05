@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">JSONWeatherForecast</string>
+    <string name="app_name">JSON天気予報アプリ</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_weather_forecast_detail">WeatherForecastDetailActivity</string>
+    <string name="title_activity_weather_forecast_detail">天気予報詳細</string>
 
 </resources>
