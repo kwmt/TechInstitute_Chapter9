@@ -45,11 +45,18 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
         setContentView(R.layout.activity_weather_forecast_detail);
 
 
+        // インテントからキーが"prefecture"である値を取り出す
+        // (例) 大阪市がタップされた場合は、prefectureにはOsaka-shiが格納される。
         String prefecture = getIntent().getStringExtra("prefecture");
+        // 天気予報API URL　と 例えば Osaka-shi の文字列を連結する。
+        // 例えば prefectureWeatherUrl は
+        // "http://api.openweathermap.org/data/2.5/forecast/daily?mode=json&units=metric&cnt=2&q=Osaka-shi"
+        // となる。
         String prefectureWeatherUrl = weatherUrl + prefecture;
 
         TextView prefectureTextView = (TextView)findViewById(R.id.prefecture);
-        prefectureTextView.setText(prefecture);
+        prefectureTextView.setText(MainActivity.prefectures.get(prefecture));
+
 
         // 非同期でネットワークにアクセスする。
         AsyncHttpRequest task = new AsyncHttpRequest();
