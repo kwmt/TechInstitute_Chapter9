@@ -98,8 +98,8 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
                 TextView tempMaxTextView = (TextView)findViewById(R.id.tempMax);
                 TextView tempMinTextView = (TextView)findViewById(R.id.tempMin);
 
-                tempMaxTextView.setText(String.valueOf(tempMax));
-                tempMinTextView.setText(String.valueOf(tempMin));
+                tempMaxTextView.setText(String.valueOf(tempMax) + "℃");
+                tempMinTextView.setText(String.valueOf(tempMin) + "℃");
 
                 // 画像をダウンロードする。
                 DownloadImageTask task = new DownloadImageTask();
