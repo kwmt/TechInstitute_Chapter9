@@ -66,10 +66,6 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
 
     public class AsyncHttpRequest extends AsyncTask<String, Void, String> {
 
-        public AsyncHttpRequest() {
-
-        }
-
         @Override
         protected String doInBackground(String... urls) {
 
@@ -140,10 +136,6 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
      * 画像ダウンロード用のAsyncTask
      */
     public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-
-
-        public DownloadImageTask() {
-        }
 
         @Override
         protected Bitmap doInBackground(String... urls) {
