@@ -26,7 +26,7 @@ import java.net.URLConnection;
 public class WeatherForecastDetailActivity extends ActionBarActivity {
 
     // 天気予報API URL
-    String weatherUrl = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Osaka&mode=json&units=metric&cnt=2";
+    String weatherUrl = "http://api.openweathermap.org/data/2.5/forecast/daily?mode=json&units=metric&cnt=2&q=";
 
     // 天気予報API 画像ダウンロード用 URL
     String imageUrl = "http://openweathermap.org/img/w/";
@@ -36,9 +36,16 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_forecast_detail);
 
+
+        String prefecture = getIntent().getStringExtra("prefecture");
+        String prefectureWeatherUrl = weatherUrl + prefecture;
+
+        TextView prefectureTextView = (TextView)findViewById(R.id.prefecture);
+        prefectureTextView.setText(prefecture);
+
         // 非同期でネットワークにアクセスする。
         AsyncHttpRequest task = new AsyncHttpRequest();
-        task.execute(weatherUrl);
+        task.execute(prefectureWeatherUrl);
     }
 
 
