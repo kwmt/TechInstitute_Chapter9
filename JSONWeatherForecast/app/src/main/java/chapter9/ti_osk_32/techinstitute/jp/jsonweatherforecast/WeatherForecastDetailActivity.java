@@ -31,10 +31,17 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
     // 天気予報API 画像ダウンロード用 URL
     String imageUrl = "http://openweathermap.org/img/w/";
 
+    private ImageView imageView;
+    private ImageView imageView2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_forecast_detail);
+
+        imageView = (ImageView)findViewById(R.id.weatherIcon);
+        imageView2 = (ImageView)findViewById(R.id.weatherIcon2);
+
 
         // 非同期でネットワークにアクセスする。
         AsyncHttpRequest task = new AsyncHttpRequest();
@@ -104,12 +111,12 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
                 tempMinTextView.setText(String.valueOf(tempMin) + "℃");
 
                 // 画像をダウンロードする。
-                DownloadImageTask task = new DownloadImageTask();
+                DownloadImageTask task = new DownloadImageTask(imageView);
                 task.execute(imageUrl + weatherIcon + ".png");
 
 
 
-                // あさっての天気予報を取得してビューにセットする。
+                // 明後日の天気予報を取得してビューにセットする。
                 JSONObject dayAfterTomorrow = list.getJSONObject(1);
                 int tempMax2 = dayAfterTomorrow.getJSONObject("temp").getInt("max");
                 int tempMin2 = dayAfterTomorrow.getJSONObject("temp").getInt("min");
@@ -122,7 +129,7 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
                 tempMinTextView2.setText(String.valueOf(tempMin2) + "℃");
 
                 // 画像をダウンロードする。
-                DownloadImageTask task2 = new DownloadImageTask();
+                DownloadImageTask task2 = new DownloadImageTask(imageView2);
                 task2.execute(imageUrl + weatherIcon2 + ".png");
 
 
@@ -140,8 +147,9 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
      */
     public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
-
-        public DownloadImageTask() {
+        ImageView imageView;
+        public DownloadImageTask(ImageView imageView){
+            this.imageView = imageView;
         }
 
         @Override
@@ -179,9 +187,7 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
         // このメソッドは非同期処理が終わった後に呼び出される。
         @Override
         protected void onPostExecute(Bitmap result) {
-            ImageView imageView = (ImageView)findViewById(R.id.weatherIcon);
             imageView.setImageBitmap(result);
-
         }
 
 
