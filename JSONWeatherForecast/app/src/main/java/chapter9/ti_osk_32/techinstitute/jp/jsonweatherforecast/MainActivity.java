@@ -42,31 +42,38 @@ public class MainActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ListView listView = (ListView) parent;
                 // クリックされたアイテムを取得します
-//                String item = (String) listView.getItemAtPosition(position);
+                // クリックされたリスト位置(position)から都道府県のkey("Osaka-shi"など)を取得する。
                 String key = prefectureKeys.get(position);
-                Toast.makeText(MainActivity.this, key, Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(MainActivity.this, WeatherForecastDetailActivity.class);
+                // 都道府県のkeyをインテントに詰め込む
                 intent.putExtra("prefecture", key);
-                startActivity(intent);
-
-
-            }
-        });
-
-        Button button = (Button)findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, WeatherForecastDetailActivity.class);
+                // 天気予報詳細アクティビティを表示する。
                 startActivity(intent);
             }
         });
+
     }
 
+    /**
+     * 都道府県リストの作成して準備しておく。
+     */
     private void setupPrefectures() {
-        prefectures.put("tokyo", "東京");
-        prefectures.put("osaka", "大阪");
+        // openweathermap APIのCityリスト
+        // http://openweathermap.org/help/city_list.txt
+
+        prefectures.put("Sapporo-shi", "札幌市");
+        prefectures.put("Aomori-shi", "青森市");
+        prefectures.put("Sendai-shi", "仙台市");
+        prefectures.put("Tokyo", "東京");
+        prefectures.put("Osaka-shi", "大阪市");
+        prefectures.put("Kobe-shi", "神戸市");
+        prefectures.put("Okayama-shi", "岡山市");
+        prefectures.put("Yamaguchi-shi", "山口市");
+        prefectures.put("Matsuyama-shi", "松山市");
+        prefectures.put("Kochi-shi", "高知市");
+        prefectures.put("Fukuoka-shi", "福岡市");
+        prefectures.put("Kagoshima-shi", "鹿児島市");
 
         prefectureKeys = new ArrayList<String>(prefectures.keySet());
     }
