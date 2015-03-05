@@ -8,23 +8,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 
 public class MainActivity extends ActionBarActivity {
 
+
     private ListView listView;
     private List<String> dataList = new ArrayList<String>();
     private ArrayAdapter<String> adapter;
 
-    private Map<String, String> prefectures = new HashMap<String, String>();
+    // キーを格納した順に順番を保持
+    public static Map<String, String> prefectures = new LinkedHashMap<String, String>();
     private ArrayList<String> prefectureKeys;
 
     @Override
