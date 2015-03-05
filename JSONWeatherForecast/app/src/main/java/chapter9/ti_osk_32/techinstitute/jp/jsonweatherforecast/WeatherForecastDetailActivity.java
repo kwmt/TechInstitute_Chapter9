@@ -39,11 +39,13 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
     // 天気予報API 画像ダウンロード用 URL
     String imageUrl = "http://openweathermap.org/img/w/";
 
+    private ImageView imageView;
+    private ImageView imageView2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_forecast_detail);
-
 
         // インテントからキーが"prefecture"である値を取り出す
         // (例) 大阪市がタップされた場合は、prefectureにはOsaka-shiが格納される。
@@ -56,6 +58,9 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
 
         TextView prefectureTextView = (TextView)findViewById(R.id.prefecture);
         prefectureTextView.setText(MainActivity.prefectures.get(prefecture));
+
+        imageView = (ImageView)findViewById(R.id.weatherIcon);
+        imageView2 = (ImageView)findViewById(R.id.weatherIcon2);
 
 
         // 非同期でネットワークにアクセスする。
@@ -108,6 +113,8 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
 
                 JSONObject jsonObject = new JSONObject(result);
                 JSONArray list = jsonObject.getJSONArray("list");
+
+                // 明日の天気予報を取得してビューにセットする。
                 JSONObject tomorrow = list.getJSONObject(0);
                 int tempMax = tomorrow.getJSONObject("temp").getInt("max");
                 int tempMin = tomorrow.getJSONObject("temp").getInt("min");
@@ -120,8 +127,27 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
                 tempMinTextView.setText(String.valueOf(tempMin) + "℃");
 
                 // 画像をダウンロードする。
-                DownloadImageTask task = new DownloadImageTask();
+                DownloadImageTask task = new DownloadImageTask(imageView);
                 task.execute(imageUrl + weatherIcon + ".png");
+
+
+
+                // 明後日の天気予報を取得してビューにセットする。
+                JSONObject dayAfterTomorrow = list.getJSONObject(1);
+                int tempMax2 = dayAfterTomorrow.getJSONObject("temp").getInt("max");
+                int tempMin2 = dayAfterTomorrow.getJSONObject("temp").getInt("min");
+                String weatherIcon2 = dayAfterTomorrow.getJSONArray("weather").getJSONObject(0).getString("icon");
+
+                TextView tempMaxTextView2 = (TextView)findViewById(R.id.tempMax2);
+                TextView tempMinTextView2 = (TextView)findViewById(R.id.tempMin2);
+
+                tempMaxTextView2.setText(String.valueOf(tempMax2) + "℃");
+                tempMinTextView2.setText(String.valueOf(tempMin2) + "℃");
+
+                // 画像をダウンロードする。
+                DownloadImageTask task2 = new DownloadImageTask(imageView2);
+                task2.execute(imageUrl + weatherIcon2 + ".png");
+
 
 
             } catch (JSONException e) {
@@ -136,6 +162,11 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
      * 画像ダウンロード用のAsyncTask
      */
     public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+
+        ImageView imageView;
+        public DownloadImageTask(ImageView imageView){
+            this.imageView = imageView;
+        }
 
         @Override
         protected Bitmap doInBackground(String... urls) {
@@ -172,9 +203,7 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
         // このメソッドは非同期処理が終わった後に呼び出される。
         @Override
         protected void onPostExecute(Bitmap result) {
-            ImageView imageView = (ImageView)findViewById(R.id.weatherIcon);
             imageView.setImageBitmap(result);
-
         }
 
 
