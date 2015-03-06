@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -23,27 +24,28 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_forecast_detail);
 
+        // 結果を格納する箱を用意
         StringBuilder content = new StringBuilder();
 
         try {
             // urlオブジェクトを作成
             URL url = new URL(weatherUrl);
 
-            // urlConnectionを作成
+            // インターネットに接続
             URLConnection urlConnection = url.openConnection();
 
             // データを取得
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            InputStream inputStream = urlConnection.getInputStream();
 
+            // データを扱いやすい形に変換する。
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             String line;
-
-            // データを一行ずつ読み込んで、contentに追記する。
             while ((line = bufferedReader.readLine()) != null) {
                 content.append(line);
             }
-
             bufferedReader.close();
-
+            Log.d("結果の確認", content.toString());
         } catch(Exception e) {
             e.printStackTrace();
         }
