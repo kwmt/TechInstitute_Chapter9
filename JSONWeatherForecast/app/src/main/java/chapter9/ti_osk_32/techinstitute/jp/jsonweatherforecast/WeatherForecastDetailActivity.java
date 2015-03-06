@@ -18,43 +18,53 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
     // 天気予報API URL
     String weatherUrl = "http://api.openweathermap.org/data/2.5/forecast/daily?mode=json&units=metric&cnt=2&q=Osaka-shi";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_forecast_detail);
 
-        // 結果を格納する箱を用意
-        StringBuilder content = new StringBuilder();
 
-        try {
-            // urlオブジェクトを作成
-            URL url = new URL(weatherUrl);
+        // サブスレッドを作って実行する。
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // インターネットに接続する処理を書く。
 
-            // インターネットに接続
-            URLConnection urlConnection = url.openConnection();
+                // 結果を格納する箱を用意
+                StringBuilder content = new StringBuilder();
 
-            // データを取得
-            InputStream inputStream = urlConnection.getInputStream();
+                try {
+                    // urlオブジェクトを作成
+                    URL url = new URL(weatherUrl);
 
-            // データを扱いやすい形に変換する。
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                content.append(line);
+                    // インターネットに接続
+                    URLConnection urlConnection = url.openConnection();
+
+                    // データを取得
+                    InputStream inputStream = urlConnection.getInputStream();
+
+                    // データを扱いやすい形に変換する。
+                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                    String line;
+                    while ((line = bufferedReader.readLine()) != null) {
+                        content.append(line);
+                    }
+                    bufferedReader.close();
+                    Log.d("結果の確認", content.toString());
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+
             }
-            bufferedReader.close();
-            Log.d("結果の確認", content.toString());
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+        }).start();
     }
 
 
     /***********************************************************
      * ここから下はメニュー項目関連(今回の講義では使用しない)
      **********************************************************/
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
