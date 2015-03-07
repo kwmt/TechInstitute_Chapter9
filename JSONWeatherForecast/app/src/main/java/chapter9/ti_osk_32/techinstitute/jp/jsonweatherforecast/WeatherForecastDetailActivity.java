@@ -37,6 +37,10 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
         // インテントに入っているcityを取り出す。
         String city = getIntent().getStringExtra("city");
 
+        // 天気予報詳細画面に都市名を表示する。
+        TextView cityTextView = (TextView) findViewById(R.id.city);
+        cityTextView.setText(city);
+
         weatherUrl = weatherUrl + city;
 
 
