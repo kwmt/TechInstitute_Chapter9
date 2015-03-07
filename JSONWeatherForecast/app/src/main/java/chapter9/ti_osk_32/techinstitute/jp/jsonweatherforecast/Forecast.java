@@ -20,20 +20,20 @@ public class Forecast {
      * コンストラクタ
      * @param jsonString JSON形式の文字列
      */
-    public Forecast(String jsonString) throws JSONException {
-        parse(jsonString);
+    public Forecast(String jsonString, Integer day) throws JSONException {
+        parse(jsonString, day);
     }
 
     /**
      * JSONをパース（解析）する。
      * @throws org.json.JSONException
      */
-    private void parse(String jsonString) throws JSONException {
+    private void parse(String jsonString, Integer day) throws JSONException {
         JSONObject jsonObject = new JSONObject(jsonString);
         // 配列を取り出す。
         JSONArray list = jsonObject.getJSONArray("list");
         // 明日の天気予報情報がはいったオブジェクトを取り出す。
-        JSONObject tomorrow = list.getJSONObject(0);
+        JSONObject tomorrow = list.getJSONObject(day);
         // 最高気温を取り出す。
         Double max = tomorrow.getJSONObject("temp").getDouble("max");
         // 最低気温を取り出す。

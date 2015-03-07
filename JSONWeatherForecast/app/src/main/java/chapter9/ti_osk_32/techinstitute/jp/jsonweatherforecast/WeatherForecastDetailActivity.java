@@ -93,21 +93,44 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
             // UIを操作する処理を書く。
 
             try {
+                // 明日の天気予報
                 // JSONをパースして、最高気温、最低気温、予報画像URLが入ったインスタンスを作成
-                Forecast forecast = new Forecast(content);
+                Forecast forecastTomorrow = new Forecast(content, 0);
 
                 // 最高気温を表示するTextView
                 TextView tempMaxTextView = (TextView)findViewById(R.id.tempMax);
                 // 最低気温を表示するTextView
                 TextView tempMinTextView = (TextView)findViewById(R.id.tempMin);
+                // 天気予報を表示するImageView
+                ImageView weatherIconImageView = (ImageView)findViewById(R.id.weatherIcon);
 
                 // 取得した最高気温、最低気温をViewにセットする。
-                tempMaxTextView.setText(forecast.getTempMax());
-                tempMinTextView.setText(forecast.getTempMin());
+                tempMaxTextView.setText(forecastTomorrow.getTempMax());
+                tempMinTextView.setText(forecastTomorrow.getTempMin());
 
                 // 画像をダウンロードして、ImageVieｗにセットする
-                DownloadImageAsyncTask task = new DownloadImageAsyncTask();
-                task.execute(forecast.getWeatherIconUrl());
+                DownloadImageAsyncTask task = new DownloadImageAsyncTask(weatherIconImageView);
+                task.execute(forecastTomorrow.getWeatherIconUrl());
+
+
+                // 明後日の天気予報
+                Forecast forecastDayAfterTomorrow = new Forecast(content, 1);
+
+                // 最高気温を表示するTextView
+                TextView tempMaxTextView2 = (TextView)findViewById(R.id.tempMax2);
+                // 最低気温を表示するTextView
+                TextView tempMinTextView2 = (TextView)findViewById(R.id.tempMin2);
+                // 天気予報を表示するImageView
+                ImageView weatherIconImageView2 = (ImageView)findViewById(R.id.weatherIcon2);
+
+                // 取得した最高気温、最低気温をViewにセットする。
+                tempMaxTextView2.setText(forecastDayAfterTomorrow.getTempMax());
+                tempMinTextView2.setText(forecastDayAfterTomorrow.getTempMin());
+
+                // 画像をダウンロードして、ImageVieｗにセットする
+                DownloadImageAsyncTask task2 = new DownloadImageAsyncTask(weatherIconImageView2);
+                task2.execute(forecastDayAfterTomorrow.getWeatherIconUrl());
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -120,6 +143,11 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
      * 天気予報画像をダウンロードするクラス
      */
     public class DownloadImageAsyncTask extends AsyncTask<String, Void, Bitmap> {
+
+        private ImageView imageView;
+        public DownloadImageAsyncTask(ImageView imageView) {
+            this.imageView = imageView;
+        }
 
         @Override
         protected Bitmap doInBackground(String... params) {
@@ -154,7 +182,6 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
             // UIを操作する処理を書く。
 
             // 画像データをimageViewにセットする。
-            ImageView imageView = (ImageView)findViewById(R.id.weatherIcon);
             imageView.setImageBitmap(image);
 
         }
