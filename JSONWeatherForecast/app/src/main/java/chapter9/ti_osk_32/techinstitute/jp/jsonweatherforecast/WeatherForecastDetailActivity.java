@@ -1,12 +1,14 @@
 package chapter9.ti_osk_32.techinstitute.jp.jsonweatherforecast;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -29,68 +31,78 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_forecast_detail);
 
-        // メインスレッドでハンドラーを生成
-        final Handler handler = new Handler();
-
-
-        // サブスレッドを作って実行する。
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // インターネットに接続する処理を書く。
-
-                // 結果を格納する箱を用意
-                StringBuilder content = new StringBuilder();
-
-                try {
-                    // urlオブジェクトを作成
-                    URL url = new URL(weatherUrl);
-
-                    // インターネットに接続
-                    URLConnection urlConnection = url.openConnection();
-
-                    // データを取得
-                    InputStream inputStream = urlConnection.getInputStream();
-
-                    // データを扱いやすい形に変換する。
-                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                    String line;
-                    while ((line = bufferedReader.readLine()) != null) {
-                        content.append(line);
-                    }
-                    bufferedReader.close();
-                    Log.d("結果の確認", content.toString());
-
-                    // JSONをパースして、最高気温、最低気温、予報画像URLが入ったインスタンスを作成
-                    final Forecast forecast = new Forecast(content.toString());
-
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            // UIを操作する処理を書く。
-                            
-                            // 最高気温を表示するTextView
-                            TextView tempMaxTextView = (TextView)findViewById(R.id.tempMax);
-                            // 最低気温を表示するTextView
-                            TextView tempMinTextView = (TextView)findViewById(R.id.tempMin);
-
-                            // 取得した最高気温、最低気温をViewにセットする。
-                            tempMaxTextView.setText(forecast.getTempMax());
-                            tempMinTextView.setText(forecast.getTempMin());
-                        }
-                    });
-
-
-
-
-                } catch(Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }).start();
+        // バックグラウンドでネットワークにアクセスして、
+        // バックグラウンドでの処理が完了すると、UIスレッドでビューにセットする。
+        ForecastLoadAsyncTask task = new ForecastLoadAsyncTask();
+        task.execute();
     }
+
+    /**
+     * 天気予報情報をロードするクラス
+     */
+    public class ForecastLoadAsyncTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            // バックグラウンド(サブスレッド)で処理する必要のある処理を書く。
+            // ここではインターネットに接続する処理を書く。
+
+            // 結果を格納する箱を用意
+            StringBuilder content = new StringBuilder();
+
+            try {
+                // urlオブジェクトを作成
+                URL url = new URL(weatherUrl);
+
+                // インターネットに接続
+                URLConnection urlConnection = url.openConnection();
+
+                // データを取得
+                InputStream inputStream = urlConnection.getInputStream();
+
+                // データを扱いやすい形に変換する。
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    content.append(line);
+                }
+                bufferedReader.close();
+                Log.d("結果の確認", content.toString());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return content.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String content) {
+            super.onPostExecute(content);
+
+            // バックグラウンドでの実行が終わると呼ばれる。（UIスレッドで実行）
+            // UIを操作する処理を書く。
+
+            try {
+                // JSONをパースして、最高気温、最低気温、予報画像URLが入ったインスタンスを作成
+                Forecast forecast = new Forecast(content);
+
+                // 最高気温を表示するTextView
+                TextView tempMaxTextView = (TextView)findViewById(R.id.tempMax);
+                // 最低気温を表示するTextView
+                TextView tempMinTextView = (TextView)findViewById(R.id.tempMin);
+
+                // 取得した最高気温、最低気温をViewにセットする。
+                tempMaxTextView.setText(forecast.getTempMax());
+                tempMinTextView.setText(forecast.getTempMin());
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
 
 
     /***********************************************************
