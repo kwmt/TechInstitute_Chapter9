@@ -16,17 +16,23 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button button = (Button)findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+        // 大阪ボタンのインスタンスを作成する。
+        Button osakaButton = (Button)findViewById(R.id.osakaButton);
+        // 大阪ボタンにOnClickイベントを設定する。
+        osakaButton.setOnClickListener(new View.OnClickListener() {
+            // 大阪ボタンが押されたときの処理を書く。
             @Override
             public void onClick(View v) {
+                // 天気予報詳細画面に遷移する。
                 Intent intent = new Intent(MainActivity.this, WeatherForecastDetailActivity.class);
                 startActivity(intent);
             }
         });
     }
 
-
+    /***********************************************************
+     * ここから下はメニュー項目関連(今回の講義では使用しない)
+     **********************************************************/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
