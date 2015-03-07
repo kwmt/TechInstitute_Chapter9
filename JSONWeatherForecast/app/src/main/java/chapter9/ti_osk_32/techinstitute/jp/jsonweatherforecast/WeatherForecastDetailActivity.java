@@ -49,15 +49,12 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
         } catch(Exception e) {
             e.printStackTrace();
         }
-
-        // 取得結果を確認
-        Log.d("TAG", content.toString());
-
     }
 
 
-
-
+    /***********************************************************
+     * ここから下はメニュー項目関連(今回の講義では使用しない)
+     **********************************************************/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
