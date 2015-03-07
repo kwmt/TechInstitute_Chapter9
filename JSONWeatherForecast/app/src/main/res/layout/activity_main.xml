@@ -12,23 +12,16 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="天気予報を見たい都市をタップして下さい。"
+        android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/osakaButton"
+
+    <ListView
+        android:id="@+id/listView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="67dp"
-        android:text="明日の大阪の天気予報を見る" />
+        android:layout_below="@id/textView"
+        android:layout_marginTop="10dp" />
 
-    <Button
-        android:id="@+id/tokyoButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/osakaButton"
-        android:layout_marginTop="67dp"
-        android:text="明日の東京の天気予報を見る" />
 </RelativeLayout>
