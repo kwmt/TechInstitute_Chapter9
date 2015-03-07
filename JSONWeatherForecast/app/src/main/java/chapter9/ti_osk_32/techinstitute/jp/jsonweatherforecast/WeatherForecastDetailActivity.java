@@ -25,7 +25,7 @@ import java.net.URLConnection;
 public class WeatherForecastDetailActivity extends ActionBarActivity {
 
     // 天気予報API URL
-    String weatherUrl = "http://api.openweathermap.org/data/2.5/forecast/daily?mode=json&units=metric&cnt=2&q=Osaka-shi";
+    String weatherUrl = "http://api.openweathermap.org/data/2.5/forecast/daily?mode=json&units=metric&cnt=2&q=";
 
 
 
@@ -33,6 +33,16 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_forecast_detail);
+
+        // インテントに入っているcityを取り出す。
+        String city = getIntent().getStringExtra("city");
+
+        // 天気予報詳細画面に都市名を表示する。
+        TextView cityTextView = (TextView) findViewById(R.id.city);
+        cityTextView.setText(city);
+
+        weatherUrl = weatherUrl + city;
+
 
         // バックグラウンドでネットワークにアクセスして、
         // バックグラウンドでの処理が完了すると、UIスレッドでビューにセットする。

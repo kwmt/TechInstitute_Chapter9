@@ -25,9 +25,25 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 // 天気予報詳細画面に遷移する。
                 Intent intent = new Intent(MainActivity.this, WeatherForecastDetailActivity.class);
+                intent.putExtra("city", "Osaka-shi");
                 startActivity(intent);
             }
         });
+
+        // 東京ボタンのインスタンスを作成する。
+        Button tokyoButton = (Button)findViewById(R.id.tokyoButton);
+        // 東京ボタンにOnClickイベントを設定する。
+        tokyoButton.setOnClickListener(new View.OnClickListener() {
+            // 東京ボタンが押されたときの処理を書く。
+            @Override
+            public void onClick(View v) {
+                // 天気予報詳細画面に遷移する。
+                Intent intent = new Intent(MainActivity.this, WeatherForecastDetailActivity.class);
+                intent.putExtra("city", "Tokyo");
+                startActivity(intent);
+            }
+        });
+
     }
 
     /***********************************************************
