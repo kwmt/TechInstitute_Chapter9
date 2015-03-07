@@ -1,11 +1,11 @@
 package chapter9.ti_osk_32.techinstitute.jp.jsonweatherforecast;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -13,16 +13,24 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
+;
+
 
 public class WeatherForecastDetailActivity extends ActionBarActivity {
 
     // 天気予報API URL
     String weatherUrl = "http://api.openweathermap.org/data/2.5/forecast/daily?mode=json&units=metric&cnt=2&q=Osaka-shi";
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_forecast_detail);
+
+        // メインスレッドでハンドラーを生成
+        final Handler handler = new Handler();
+
 
         // サブスレッドを作って実行する。
         new Thread(new Runnable() {
@@ -54,16 +62,16 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
                     Log.d("結果の確認", content.toString());
 
                     // JSONをパースして、最高気温、最低気温、予報画像URLが入ったインスタンスを作成
-                    Forecast forecast = new Forecast(content.toString());
+                    final Forecast forecast = new Forecast(content.toString());
 
-                    // 最高気温を表示するTextView
-                    TextView tempMaxTextView = (TextView)findViewById(R.id.tempMax);
-                    // 最低気温を表示するTextView
-                    TextView tempMinTextView = (TextView)findViewById(R.id.tempMin);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            // UIを操作する処理を書く。
 
-                    // 取得した最高気温、最低気温をViewにセットする。
-                    tempMaxTextView.setText(forecast.getTempMax());
-                    tempMinTextView.setText(forecast.getTempMin());
+                        }
+                    });
+
 
 
 
