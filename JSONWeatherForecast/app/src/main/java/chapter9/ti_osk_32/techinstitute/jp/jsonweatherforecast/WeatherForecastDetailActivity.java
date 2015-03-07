@@ -54,7 +54,7 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
                     Log.d("結果の確認", content.toString());
 
                     // JSONをパースして、最高気温、最低気温、予報画像URLが入ったインスタンスを作成
-                    Forecast forecast = new Forecast(content.toString());
+                    final Forecast forecast = new Forecast(content.toString());
 
                     // 最高気温を表示するTextView
                     TextView tempMaxTextView = (TextView)findViewById(R.id.tempMax);
