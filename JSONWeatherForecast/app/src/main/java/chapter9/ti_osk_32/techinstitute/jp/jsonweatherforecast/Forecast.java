@@ -21,15 +21,15 @@ public class Forecast {
      * @param jsonString JSON形式の文字列
      */
     public Forecast(String jsonString) throws JSONException {
-        JSONObject jsonObject = new JSONObject(jsonString);
-        parse(jsonObject);
+        parse(jsonString);
     }
 
     /**
      * JSONをパース（解析）する。
      * @throws org.json.JSONException
      */
-    private void parse(JSONObject jsonObject) throws JSONException {
+    private void parse(String jsonString) throws JSONException {
+        JSONObject jsonObject = new JSONObject(jsonString);
         // 配列を取り出す。
         JSONArray list = jsonObject.getJSONArray("list");
         // 明日の天気予報情報がはいったオブジェクトを取り出す。
