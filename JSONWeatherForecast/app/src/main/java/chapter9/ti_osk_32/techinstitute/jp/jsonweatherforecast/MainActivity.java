@@ -79,9 +79,10 @@ public class MainActivity extends ActionBarActivity {
     }
 
     protected void setAdapters(){
+        // レイアウトとリストデータをひもづける
         adapter = new ArrayAdapter<String>(
                 this,
-                android.R.layout.simple_list_item_1,
+                android.R.layout.simple_list_item_1, // Androidがもともとも用意しているレイアウト
                 dataList);
         listView.setAdapter(adapter);
 
