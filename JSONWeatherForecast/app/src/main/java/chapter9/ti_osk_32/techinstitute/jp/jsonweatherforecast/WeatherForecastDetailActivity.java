@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -68,7 +69,15 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
                         @Override
                         public void run() {
                             // UIを操作する処理を書く。
+                            
+                            // 最高気温を表示するTextView
+                            TextView tempMaxTextView = (TextView)findViewById(R.id.tempMax);
+                            // 最低気温を表示するTextView
+                            TextView tempMinTextView = (TextView)findViewById(R.id.tempMin);
 
+                            // 取得した最高気温、最低気温をViewにセットする。
+                            tempMaxTextView.setText(forecast.getTempMax());
+                            tempMinTextView.setText(forecast.getTempMin());
                         }
                     });
 
