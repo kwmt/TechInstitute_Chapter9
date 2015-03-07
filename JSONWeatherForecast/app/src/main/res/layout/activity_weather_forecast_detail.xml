@@ -9,7 +9,7 @@
     tools:context="chapter9.ti_osk_32.techinstitute.jp.jsonweatherforecast.WeatherForecastDetailActivity">
 
     <TextView
-        android:id="@+id/prefecture"
+        android:id="@+id/city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="大阪"
@@ -19,7 +19,7 @@
         android:id="@+id/tomorrowTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/prefecture"
+        android:layout_below="@id/city"
         android:layout_marginTop="20dp"
         android:text="明日の天気予報"
         android:textSize="24sp" />
