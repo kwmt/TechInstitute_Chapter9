@@ -1,11 +1,14 @@
 package chapter9.ti_osk_32.techinstitute.jp.jsonweatherforecast;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -96,6 +99,10 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
                 tempMaxTextView.setText(forecast.getTempMax());
                 tempMinTextView.setText(forecast.getTempMin());
 
+                // 画像をダウンロードして、ImageVieｗにセットする
+                DownloadImageAsyncTask task = new DownloadImageAsyncTask();
+                task.execute(forecast.getWeatherIconUrl());
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -103,6 +110,49 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
         }
     }
 
+    /**
+     * 天気予報画像をダウンロードするクラス
+     */
+    public class DownloadImageAsyncTask extends AsyncTask<String, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            // バックグラウンド(サブスレッド)で処理する必要のある処理を書く。
+            // ここではインターネットに接続する処理を書く。
+
+            // 結果を格納する箱を用意
+            Bitmap bitmap = null;
+
+            try {
+                // urlオブジェクトを作成
+                URL url = new URL(params[0]);
+
+                // urlConnectionを作成
+                URLConnection urlConnection = url.openConnection();
+
+                // 画像データを取得
+                InputStream inputStream = urlConnection.getInputStream();
+                bitmap = BitmapFactory.decodeStream(inputStream);
+
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap image) {
+            super.onPostExecute(image);
+
+            // バックグラウンドでの実行が終わると呼ばれる。（UIスレッドで実行）
+            // UIを操作する処理を書く。
+
+            // 画像データをimageViewにセットする。
+            ImageView imageView = (ImageView)findViewById(R.id.weatherIcon);
+            imageView.setImageBitmap(image);
+
+        }
+    }
 
 
     /***********************************************************
