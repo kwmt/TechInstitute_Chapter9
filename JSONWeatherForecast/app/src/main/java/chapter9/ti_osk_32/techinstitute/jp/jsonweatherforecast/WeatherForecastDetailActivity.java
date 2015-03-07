@@ -26,8 +26,6 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
     // 天気予報API URL
     String weatherUrl = "http://api.openweathermap.org/data/2.5/forecast/daily?mode=json&units=metric&cnt=2&q=";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +36,11 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
 
         // 天気予報詳細画面に都市名を表示する。
         TextView cityTextView = (TextView) findViewById(R.id.city);
-        cityTextView.setText(city);
+
+        // 例）"Osaka-shi"から"大阪市"を取り出す。
+        String kanjiCity = MainActivity.cities.get(city);
+
+        cityTextView.setText(kanjiCity);
 
         // バックグラウンドでネットワークにアクセスして、
         // バックグラウンドでの処理が完了すると、UIスレッドでビューにセットする。
