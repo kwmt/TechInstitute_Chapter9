@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -22,7 +23,6 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_forecast_detail);
-
 
         // サブスレッドを作って実行する。
         new Thread(new Runnable() {
@@ -52,6 +52,21 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
                     }
                     bufferedReader.close();
                     Log.d("結果の確認", content.toString());
+
+                    // JSONをパースして、最高気温、最低気温、予報画像URLが入ったインスタンスを作成
+                    Forecast forecast = new Forecast(content.toString());
+
+                    // 最高気温を表示するTextView
+                    TextView tempMaxTextView = (TextView)findViewById(R.id.tempMax);
+                    // 最低気温を表示するTextView
+                    TextView tempMinTextView = (TextView)findViewById(R.id.tempMin);
+
+                    // 取得した最高気温、最低気温をViewにセットする。
+                    tempMaxTextView.setText(forecast.getTempMax());
+                    tempMinTextView.setText(forecast.getTempMin());
+
+
+
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
