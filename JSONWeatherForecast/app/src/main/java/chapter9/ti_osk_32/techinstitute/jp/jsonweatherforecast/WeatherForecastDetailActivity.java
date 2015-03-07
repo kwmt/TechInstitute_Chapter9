@@ -34,6 +34,9 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_forecast_detail);
 
+        // インテントに入っているcityを取り出す。
+        String city = getIntent().getStringExtra("city");
+
         // バックグラウンドでネットワークにアクセスして、
         // バックグラウンドでの処理が完了すると、UIスレッドでビューにセットする。
         ForecastLoadAsyncTask task = new ForecastLoadAsyncTask();
