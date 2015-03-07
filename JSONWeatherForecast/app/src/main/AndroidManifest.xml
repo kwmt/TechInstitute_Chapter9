@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="chapter9.ti_osk_32.techinstitute.jp.jsonweatherforecast" >
+    package="chapter9.ti_osk_32.techinstitute.jp.jsonweatherforecast">
+
+    <!--ネットワークに接続するには、次の権限(パーミッション)が必要-->
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,8 +21,7 @@
         </activity>
         <activity
             android:name=".WeatherForecastDetailActivity"
-            android:label="@string/title_activity_weather_forecast_detail" >
-        </activity>
+            android:label="@string/title_activity_weather_forecast_detail"></activity>
     </application>
 
 </manifest>
