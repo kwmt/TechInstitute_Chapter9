@@ -10,5 +10,6 @@
         <item>梨</item>
         <item>ドリアン</item>
     </string-array>
+    <string name="spinnerSample">くだもの選択</string>
 
 </resources>

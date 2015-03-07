@@ -21,7 +21,8 @@
         android:layout_below="@+id/textView"
         android:layout_marginTop="100dp"
         android:layout_toEndOf="@+id/textView"
-        android:entries="@array/fruits"/>
+        android:entries="@array/fruits"
+        android:prompt="@string/spinnerSample"/>
 
         <!--entries(entryの複数形):選択項目一覧-->
         <!--このentriesにstrings.xmlで定義したstring-arrayを設定する-->

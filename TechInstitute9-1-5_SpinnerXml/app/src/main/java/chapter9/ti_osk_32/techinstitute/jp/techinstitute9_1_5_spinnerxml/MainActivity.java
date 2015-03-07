@@ -19,12 +19,21 @@ public class MainActivity extends ActionBarActivity {
 
         // activity_mainからidがspinnerのインスタンスを取得してspinner変数に格納する。
         Spinner spinner = (Spinner)findViewById(R.id.spinner);
+        // 初回起動時にonIteSelectedがよばれてしまう回避策
+        spinner.setFocusable(false);
 
         // インスタンスspinnerに項目が選択されたときの動作を設定する。
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // 項目が選択されたときの実際の動作を記述する。
+
+                // 初回起動時にonIteSelectedがよばれてしまう回避策
+                Spinner spinner = (Spinner)findViewById(R.id.spinner);
+                if(spinner.isFocusable() == false) {
+                    spinner.setFocusable(true);
+                    return;
+                }
 
                 // 選択された項目から文字を取り出す
                 String str = ((Spinner)parent).getSelectedItem().toString();
