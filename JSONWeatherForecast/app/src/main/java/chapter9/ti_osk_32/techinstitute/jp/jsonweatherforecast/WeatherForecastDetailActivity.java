@@ -19,7 +19,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-;
 
 
 public class WeatherForecastDetailActivity extends ActionBarActivity {
@@ -41,13 +40,10 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
         TextView cityTextView = (TextView) findViewById(R.id.city);
         cityTextView.setText(city);
 
-        weatherUrl = weatherUrl + city;
-
-
         // バックグラウンドでネットワークにアクセスして、
         // バックグラウンドでの処理が完了すると、UIスレッドでビューにセットする。
         ForecastLoadAsyncTask task = new ForecastLoadAsyncTask();
-        task.execute();
+        task.execute(weatherUrl + city);
     }
 
     /**
@@ -65,7 +61,7 @@ public class WeatherForecastDetailActivity extends ActionBarActivity {
 
             try {
                 // urlオブジェクトを作成
-                URL url = new URL(weatherUrl);
+                URL url = new URL(params[0]);
 
                 // インターネットに接続
                 URLConnection urlConnection = url.openConnection();
