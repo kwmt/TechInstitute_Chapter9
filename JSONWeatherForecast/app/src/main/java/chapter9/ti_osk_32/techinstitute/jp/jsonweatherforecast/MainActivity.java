@@ -25,6 +25,7 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 // 天気予報詳細画面に遷移する。
                 Intent intent = new Intent(MainActivity.this, WeatherForecastDetailActivity.class);
+                intent.putExtra("city", "Osaka-shi");
                 startActivity(intent);
             }
         });
@@ -38,6 +39,7 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 // 天気予報詳細画面に遷移する。
                 Intent intent = new Intent(MainActivity.this, WeatherForecastDetailActivity.class);
+                intent.putExtra("city", "Tokyo");
                 startActivity(intent);
             }
         });
